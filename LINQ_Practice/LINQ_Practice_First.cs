@@ -59,7 +59,7 @@ namespace LINQ_Practice
         {
             //var ActualCohort = PracticeData/*FILL IN LINQ EXPRESSION*/;
             var ActualCohort = PracticeData.First(cohort => cohort.FullTime 
-                                                         && cohort.PrimaryInstructor.Birthday.Year > 2017);
+                                                         && cohort.PrimaryInstructor.Birthday > DateTime.Now);
             //Assert.AreEqual(ActualCohort, CohortBuilder.Cohort2);
             Assert.AreEqual(ActualCohort, CohortBuilder.Cohort2);
         }
