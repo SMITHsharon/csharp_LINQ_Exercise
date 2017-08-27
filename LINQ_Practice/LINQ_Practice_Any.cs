@@ -30,43 +30,56 @@ namespace LINQ_Practice
         [TestMethod]
         public void DoAnyCohortsHavePrimaryInstructorsBornIn1980s()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAny
+            //var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var doAny = PracticeData.Any(cohort => cohort.PrimaryInstructor.Birthday.Year >= 1980 
+                                                && cohort.PrimaryInstructor.Birthday.Year < 1990);
+            //Assert.IsTrue(false); //<-- change false to doAny
+            Assert.IsTrue(doAny); 
         }
 
         [TestMethod]
         public void DoAnyCohortsHaveActivePrimaryInstructors()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAny
+            //var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var doAny = PracticeData.Any(c => c.PrimaryInstructor.Active);
+            //Assert.IsTrue(false); //<-- change false to doAny
+            Assert.IsTrue(doAny);
         }
 
         [TestMethod]
         public void DoAnyActiveCohortsHave3JuniorInstructors()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAny
+            //var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var doAny = PracticeData.Any(c => c.JuniorInstructors.Count() == 3);
+            //Assert.IsTrue(false); //<-- change false to doAny
+            Assert.IsTrue(doAny); 
         }
 
         [TestMethod]
         public void AreAnyCohortsBothFullTimeAndNotActive()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            Assert.IsTrue(false); //<-- change false to doAny
+            //var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;
+            var doAny = PracticeData.Any(c => c.FullTime && !c.Active);
+            //Assert.IsTrue(false); //<-- change false to doAny
+            Assert.IsTrue(doAny);
         }
 
         [TestMethod]
         public void AreAnyStudentsInCohort3NotActiveAndBornInOctober()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;  //HINT: Cohort3 is PracticeData[2]
-            Assert.IsFalse(true); //<-- change true to doAny
+            //var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;  //HINT: Cohort3 is PracticeData[2]
+            var doAny = PracticeData[2].Students.Any(s => !s.Active && s.Birthday.Month == 10); 
+            //Assert.IsFalse(true); //<-- change true to doAny
+            Assert.IsFalse(doAny);
         }
 
         [TestMethod]
         public void AreAnyJuniorInstructorsInCohort4NotActive()
         {
-            var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;  //HINT: Cohort4 is PracticeData[3]
-            Assert.IsFalse(true); //<-- change true to doAny
+            //var doAny = PracticeData/*FILL IN LINQ EXPRESSION*/;  //HINT: Cohort4 is PracticeData[3]
+            var doAny = PracticeData[3].JuniorInstructors.Any(ji => !ji.Active);  
+            //Assert.IsFalse(true); //<-- change true to doAny
+            Assert.IsFalse(doAny); 
         }
     }
 }
