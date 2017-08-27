@@ -31,7 +31,7 @@ namespace LINQ_Practice
         public void DoAllCohortsHaveTwoOrMoreJuniorInstructors()
         {
             //var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            var doAll = PracticeData.All(cohort => cohort.JuniorInstructors.Count > 1);
+            var doAll = PracticeData.All(cohort => cohort.JuniorInstructors.Count() > 1);
             //Assert.IsTrue(false); //<-- change false to doAll
             Assert.IsTrue(doAll); //<-- change false to doAll
         }
@@ -40,7 +40,7 @@ namespace LINQ_Practice
         public void DoAllCohortsFiveStudents()
         {
             //var doAll = PracticeData/*FILL IN LINQ EXPRESSION*/;
-            var doAll = PracticeData.All(cohort => cohort.Students.Count == 5);
+            var doAll = PracticeData.All(cohort => cohort.Students.Count() == 5);
             //Assert.IsTrue(false); //<-- change false to doAll
             Assert.IsTrue(doAll); //<-- change false to doAll
         }
