@@ -31,22 +31,24 @@ namespace LINQ_Practice
         {
             //List<Cohort> ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
             List<Cohort> ActualCohorts = PracticeData.Where(cohort => cohort.Active == true).ToList(); 
-            CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1, CohortBuilder.Cohort3 });
+            CollectionAssert.AreEqual(ActualCohorts, 
+                new List<Cohort> { CohortBuilder.Cohort1, CohortBuilder.Cohort3 });
         }
 
         [TestMethod]
         public void GetAllFullTimeCohorts()
         {
             //List<Cohort> ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
-            List<Cohort> ActualCohorts = PracticeData.Where(cohort => cohort.FullTime == true).ToList();
-            CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort4 });
+            List<Cohort> ActualCohorts = PracticeData.Where(c => c.FullTime == true).ToList();
+            CollectionAssert.AreEqual(ActualCohorts, 
+                new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort4 });
         }
 
         [TestMethod]
         public void GetAllCohortsWherePrimaryInstructorIsJurnell()
         {
             //List<Cohort> ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
-            List<Cohort> ActualCohorts = PracticeData.Where(cohort => cohort.PrimaryInstructor.FirstName == "Jurnell").ToList();
+            List<Cohort> ActualCohorts = PracticeData.Where(c => c.PrimaryInstructor.FirstName == "Jurnell").ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1 });
         }
         
@@ -54,7 +56,7 @@ namespace LINQ_Practice
         public void GetAllCohortsWithThreeJuniorInstructors()
         {
             //var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
-            var ActualCohorts = PracticeData.Where(cohort => cohort.JuniorInstructors.Count() == 3).ToList();
+            var ActualCohorts = PracticeData.Where(c => c.JuniorInstructors.Count() == 3).ToList();
             CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort3 });
         }
         

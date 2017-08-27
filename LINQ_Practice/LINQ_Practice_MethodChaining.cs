@@ -29,11 +29,16 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsWithZacharyZohanAsPrimaryOrJuniorInstructor()
         {
-            var jrInstructors = PracticeData.Where(cohort => cohort.JuniorInstructors.Any(instructor => instructor.FirstName == "Zachary" && instructor.LastName == "Zohan"));
+            var jrInstructors = PracticeData.Where(cohort => cohort.JuniorInstructors
+                                            .Any(instructor => instructor.FirstName == "Zachary" && instructor.LastName == "Zohan"));
+
             var primaryInstructors = PracticeData.Where(cohort => cohort.PrimaryInstructor.FirstName == "Zachary" && cohort.PrimaryInstructor.LastName == "Zohan");
             //var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
+            // ORDER MATTERED
+            // ActualCohorts = jrInstructors.Union(primaryInstructors).ToList(); ==> ERROR
             var ActualCohorts = primaryInstructors.Union(jrInstructors).ToList();                            
-            CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort3 });
+            CollectionAssert.AreEqual(ActualCohorts, 
+                    new List<Cohort> { CohortBuilder.Cohort2, CohortBuilder.Cohort3 });
         }
 
         [TestMethod]
@@ -49,15 +54,18 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllCohortsWhereAStudentOrInstructorFirstNameIsKate()
         {
-            var studentKate = PracticeData.Where(c => c.Students.Any(student => student.FirstName == "Kate"));
+            var studentKate = PracticeData.Where(c => c.Students.Any(s => s.FirstName == "Kate"));
             var primaryIntructorKate = PracticeData.Where(c => c.PrimaryInstructor.FirstName == "Kate");
-            var jrInstructorKate = PracticeData.Where(c => c.JuniorInstructors.Any(instructor => instructor.FirstName == "Kate"));
+            var jrInstructorKate = PracticeData.Where(c => c.JuniorInstructors.Any(ji => ji.FirstName == "Kate"));
             //var ActualCohorts = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
             // ORDER MATTERS ... 
             //var ActualCohorts = studentKate.Union(primaryIntructorKate).Union(jrInstructorKate).ToList();
             //var ActualCohorts = primaryIntructorKate.Union(studentKate).Union(jrInstructorKate).ToList();
             var ActualCohorts = jrInstructorKate.Union(studentKate).Union(primaryIntructorKate).ToList();
-            CollectionAssert.AreEqual(ActualCohorts, new List<Cohort> { CohortBuilder.Cohort1, CohortBuilder.Cohort3, CohortBuilder.Cohort4 });
+            CollectionAssert.AreEqual(ActualCohorts, 
+                new List<Cohort> { CohortBuilder.Cohort1,
+                                   CohortBuilder.Cohort3,
+                                   CohortBuilder.Cohort4 });
         }
 
         [TestMethod]
@@ -82,11 +90,14 @@ namespace LINQ_Practice
         [TestMethod]
         public void GetAllInactiveStudentsByLastName()
         {
-            var alphaStudents = PracticeData.SelectMany(c => c.Students).OrderBy(s => s.LastName);
-            //var inactiveStudents = PracticeData.Students.
+            //var alphaStudents = PracticeData.SelectMany(c => c.Students).OrderBy(s => s.LastName);
             //var ActualStudents = PracticeData/*FILL IN LINQ EXPRESSION*/.ToList();
             var ActualStudents = PracticeData.SelectMany(c => c.Students).OrderBy(s => s.LastName).Where(s => s.Active == false).ToList();
-            CollectionAssert.AreEqual(ActualStudents, new List<Student> { CohortBuilder.Student2, CohortBuilder.Student11, CohortBuilder.Student12, CohortBuilder.Student17 });
+            CollectionAssert.AreEqual(ActualStudents, 
+                new List<Student> { CohortBuilder.Student2,
+                                    CohortBuilder.Student11,
+                                    CohortBuilder.Student12,
+                                    CohortBuilder.Student17 });
         }
     }
 }
